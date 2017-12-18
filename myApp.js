@@ -11,20 +11,31 @@ var createObjects = function() {
 );
   oven = new KnowledgeObject('Oven', {
     'name': 'Oven',
-    'on': false
+    'isOpen': false
+  });
+
+  house = new KnowledgeObject('House', {
+    'latitude': 12.345,
+    'longitude': 67.890,
+    'name': 'home'
   });
 
 };
 
 var createRelations = function() {
-  personToOven = new KnowledgeRelation(
-    'ownership', person, oven
+  personToHouse = new KnowledgeRelation(
+    'ownership', person, house
+  );
+
+  houseToOven = new KnowledgeRelation(
+    'has-as-part', house, oven
   );
 };
 
 Promise.all(
   [createObjects(),
   person.create(),
+  house.create(),
   oven.create()
 ]).then(
   function (results) {
@@ -32,7 +43,8 @@ Promise.all(
 
     Promise.all(
       [createRelations(),
-      personToOven.create()]
+      personToHouse.create(),
+      houseToOven.create()]
     ).then(
       function (results) {
         console.log('All relations created\n\n');
