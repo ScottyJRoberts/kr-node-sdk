@@ -1,6 +1,7 @@
-require('dotenv').config({ path: __dirname + '/.env' });
+require('dotenv').config({path: __dirname + '/.env'});
 var KnowledgeObject = require('./sdk/object');
 var KnowledgeRelation = require('./sdk/relation');
+
 
 function getHouseAndPersonForOven(ovenID) {
   console.log('wihtin the get house and person for Oven');
