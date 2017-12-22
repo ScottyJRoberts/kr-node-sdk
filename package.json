@@ -2,7 +2,7 @@
   "name": "sagan_kr_sdk",
   "version": "1.0.0",
   "description": "An object-oriented SDK for developing K+R proactivity in Node",
-  "main": "action.js",
+  "main": "condition.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

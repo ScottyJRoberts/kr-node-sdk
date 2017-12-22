@@ -14,6 +14,7 @@ function main(event) {
       'key': process.env.api_key,
       'alert': 'HOLY SHIT! Your ${name} is open!'
     };
+    console.log(post_data);
     var headers = {
       'Content-type': 'application/json',
     };
@@ -23,7 +24,7 @@ function main(event) {
             headers: headers,
             body: JSON.stringify(post_data)
     };
-
+    console.log(options);
     return new Promise(function (res, rej) {
       request(options, function (err, response, body) {
         if (err || response.statusCode !== 200) {
@@ -31,7 +32,9 @@ function main(event) {
           rejData = {code: response.statusCode, body: body};
           rej(rejData);
         } else {
-          resData = {body: body};
+          var o = JSON.parse(options.body)
+          console.log('body is ', JSON.parse(options.body).alert);
+          resData = {body: JSON.parse(options.body).alert};
           res(resData);
         }
       });

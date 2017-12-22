@@ -68,7 +68,7 @@ function main(event){
         console.log('OVENS ON HOUSE IS BURNING DOWN');
         return returnContent(true);
       } else {
-        console.log('Smokey saved the day');
+        console.log('Oven is not on or the owner is home');
         return returnContent(false);
       }
     });
