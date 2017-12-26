@@ -4,7 +4,7 @@ var KnowledgeRelation = require('./sdk/relation');
 
 
 function getHouseAndPersonForOven(ovenID) {
-  console.log('wihtin the get house and person for Oven');
+  console.log('within the get house and person for Oven');
   var oven, house, owner;
   return KnowledgeObject.retrieve(ovenID).then((ovenObj)=> {
     oven = ovenObj;
@@ -59,8 +59,19 @@ function main(event){
       var oven = objects[0];
       var house = objects[1];
       var owner = objects[2];
-
-      //if the door is open and the owner isn't home
+      //test to see if the oven has been made into the correct way
+      if (oven.attributes.on && oven.attributes['temp'] != 400) {
+        console.log('oven is at the wrong temp');
+        return returnContent(true);
+      }
+      else if (oven.attributes.on && oven.attributes['temp'] == 400) {
+        console.log('oven is at the right temp');
+        return returnContent(false);
+      } else {
+        console.log('oven is not on');
+        return returnContent(false);
+      }
+      //if the oven is open and the owner isn't home
       if (oven.attributes.isOpen && (
         owner.attributes['longitude'] != house.attributes['longitude'] ||
           owner.attributes['latitude'] != house.attributes['latitude']
@@ -77,6 +88,7 @@ function main(event){
     return returnContent(false);
   }
 }
+
 if (require.main === module) {
   console.log('Running Locally');
   objId = process.argv[2];

@@ -11,7 +11,9 @@ var createObjects = function() {
 );
   oven = new KnowledgeObject('Oven', {
     'name': 'Oven',
-    'isOpen': false
+    'isOpen': false,
+    'on': false,
+    'temp': 0
   });
 
   house = new KnowledgeObject('House', {
