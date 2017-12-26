@@ -11,8 +11,8 @@ function main(event) {
     name = ovenObj.attributes.name;
 
     var post_data = {
-      'key': process.env.api_key,
-      'alert': 'HOLY SHIT! Your ${name} is open!'
+      "key": process.env.api_key,
+      "alert": "Oven is open"
     };
     console.log(post_data);
     var headers = {
@@ -32,9 +32,10 @@ function main(event) {
           rejData = {code: response.statusCode, body: body};
           rej(rejData);
         } else {
-          var o = JSON.parse(options.body)
+          var o = JSON.parse(options.body);
+          console.log('body appears to be ', body);
           console.log('body is ', JSON.parse(options.body).alert);
-          resData = {body: JSON.parse(options.body).alert};
+          resData =  JSON.parse(options.body).alert;
           res(resData);
         }
       });
@@ -59,4 +60,6 @@ if (require.main === module) {
 } else {
     console.log("running in openwhisk")
     exports.main = main;
+    //missing the logic to send it out into this platform
+
 }
